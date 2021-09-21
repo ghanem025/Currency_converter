@@ -31,7 +31,7 @@ public class GUI implements ActionListener {
     DecimalFormat f = new DecimalFormat("##.##");
 
     public GUI() {
-        HashMap<String, Integer> currencies = new HashMap<String, Integer>();
+        HashMap<String, Integer> currencies = new HashMap<String, Integer>();//create hashmap to store different currncies
         currencies.put("USD", 1);
         currencies.put("CAD", 2);
         currencies.put("EUR", 3);
@@ -39,7 +39,7 @@ public class GUI implements ActionListener {
         currencies.put("INR", 5);
         currencies.put("JPY", 6);
 
-        JFrame frame = new JFrame("Frame");
+        JFrame frame = new JFrame("Frame");//create Jframe
         JPanel panel = new JPanel();
 
         frame.setSize(400, 300);
@@ -47,12 +47,12 @@ public class GUI implements ActionListener {
         frame.add(panel);
         panel.setLayout(null);
 
-        JButton button = new JButton("Convert");
-        button.addActionListener(this);
-        button.setBounds(30, 200, 100, 30);
+        JButton button = new JButton("Convert");//create button to convert the values
+        button.addActionListener(this);//add actionlistener
+        button.setBounds(30, 200, 100, 30);//set position and width/height for the buttons
         panel.add(button);
 
-        money = new JTextField();
+        money = new JTextField();//textfield to enter the amount of money to convert
         money.setBounds(70, 70, 90, 20);
         panel.add(money);
 
@@ -68,11 +68,12 @@ public class GUI implements ActionListener {
         label2.setBounds(252, 65, 80, 25);
         panel.add(label2);
 
-        Set<String> keySet = currencies.keySet();
-        ArrayList<String> listOfKeys = new ArrayList<String>(keySet);
-        country = GetStringArray(listOfKeys);
+        Set<String> keySet = currencies.keySet();//we want to isolate the Strings in the hashmap, so we make a set of strings
+        //using a hashmap keyset
+        ArrayList<String> listOfKeys = new ArrayList<String>(keySet);// add the key set to a string arraylist
+        country = GetStringArray(listOfKeys);//turn arraylist into an array of strings for the JComboBox
 
-        cb = new JComboBox(country);
+        cb = new JComboBox(country);//jCombobox takes an array of strings and creates a drop down using those values.
         cb.setBounds(160, 70, 90, 20);
         panel.add(cb);
 
@@ -93,7 +94,7 @@ public class GUI implements ActionListener {
         return str;
     }
 
-    private static String sendHttpGETrequest(String fromcode, String toCode, double amount) throws IOException {
+    private static String GETrequest(String fromcode, String toCode, double amount) throws IOException {
         DecimalFormat f = new DecimalFormat("##.##");
         String GET_URL = "https://free.currconv.com/api/v7/convert?q=" + fromcode + "_" + toCode + "&compact=ultra&apiKey=7fd79f413621cbd201fe";
         URL url = new URL(GET_URL);
@@ -126,8 +127,8 @@ public class GUI implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (money.getText().equals("")) {
+    public void actionPerformed(ActionEvent e) {//when the convert button is pressed
+        if (money.getText().equals("")) {//check if the box is empty, if it is then send an error message to the user
             Windowerror();
         }
         else {
@@ -137,29 +138,28 @@ public class GUI implements ActionListener {
                 box1 = (String) cb.getSelectedItem();
                 box2 = (String) cb2.getSelectedItem();
                 amount = Integer.parseInt(money.getText());
-                try {
-                    converted.setText("Here is your converted currency: " + sendHttpGETrequest(box1, box2, amount));
+                try {//check if the amount entered is a number/valid input
+                    converted.setText("Here is your converted currency: " + GETrequest(box1, box2, amount));
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
-            catch (NumberFormatException f)
+            catch (NumberFormatException f)// if it's not a valid amount we give an error message and reset the text field
             {
                 money.setText("");
                 stupidWindowerror();
             }
-
         }
     }
-    private void Windowerror(){
+    private void Windowerror(){// pop up windowerror
         JFrame frame = new JFrame("Name Error");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JOptionPane.showMessageDialog(frame, "homie are you broke or something??Cause if you are then you shouldn't be using this app", "Error", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "Please enter the amount you would like to convert", "Empty amount", JOptionPane.WARNING_MESSAGE);
     }
     private void stupidWindowerror(){
         JFrame frame = new JFrame("Name Error");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JOptionPane.showMessageDialog(frame, "you must be special, this is a fucking currency converter not your english essay put a fucking number in", "Error", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "Please enter a valid input (letters are not a valid input)", "Invalid Input", JOptionPane.WARNING_MESSAGE);
 
     }
 
