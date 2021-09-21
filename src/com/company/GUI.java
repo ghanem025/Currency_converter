@@ -105,21 +105,17 @@ public class GUI implements ActionListener {
             BufferedReader in = new BufferedReader((new InputStreamReader(httpURLConnection.getInputStream())));
             String line;
             StringBuffer response = new StringBuffer();
-
             while ((line = in.readLine()) != null) {
                 response.append(line);
             }
             in.close();
-
             JSONObject obj = new JSONObject(response.toString());
-            System.out.println(obj);
             Double exchange = obj.getDouble(fromcode + "_" + toCode);
 
             return f.format(amount * exchange) + " " + toCode;
         } else {
             return "no work sadge";
         }
-
     }
 
     public static void main(String[] args) throws IOException {
