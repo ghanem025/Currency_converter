@@ -1,5 +1,4 @@
 package com.company;
-
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.*;
 import java.util.HashMap;
 
-
 public class GUI implements ActionListener {
     private JTextField money;
     private JTextField money2;
@@ -31,7 +29,7 @@ public class GUI implements ActionListener {
     DecimalFormat f = new DecimalFormat("##.##");
 
     public GUI() {
-        HashMap<String, Integer> currencies = new HashMap<String, Integer>();//create hashmap to store different currncies
+        HashMap<String, Integer> currencies = new HashMap<String, Integer>();//create hashmap to store different currencies
         currencies.put("USD", 1);
         currencies.put("CAD", 2);
         currencies.put("EUR", 3);
@@ -39,7 +37,7 @@ public class GUI implements ActionListener {
         currencies.put("INR", 5);
         currencies.put("JPY", 6);
 
-        JFrame frame = new JFrame("Frame");//create Jframe
+        JFrame frame = new JFrame("Currency Converter");//create Jframe
         JPanel panel = new JPanel();
 
         frame.setSize(400, 300);
@@ -143,7 +141,7 @@ public class GUI implements ActionListener {
             catch (NumberFormatException f)// if it's not a valid amount we give an error message and reset the text field
             {
                 money.setText("");
-                stupidWindowerror();
+                Windowerror2();
             }
         }
     }
@@ -152,11 +150,9 @@ public class GUI implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JOptionPane.showMessageDialog(frame, "Please enter the amount you would like to convert", "Empty amount", JOptionPane.WARNING_MESSAGE);
     }
-    private void stupidWindowerror(){
+    private void Windowerror2(){
         JFrame frame = new JFrame("Name Error");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JOptionPane.showMessageDialog(frame, "Please enter a valid input (letters are not a valid input)", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-
     }
-
 }
