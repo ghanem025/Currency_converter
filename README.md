@@ -25,6 +25,8 @@ also there are drop down menus to select different currencies you would like to 
  
  Fun little project i did since i always find myself trying to figure out different exchange rates since i have family all over the world, now it will be much easier for me and i don't need a browser to do it either.
 
+more features coming soon...
+
  
 
 
