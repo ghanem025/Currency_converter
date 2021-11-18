@@ -132,8 +132,12 @@ public class GUI implements ActionListener {
         swpBtn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("swap");
-
+                if (money.getText().equals("")) {//check if the box is empty, if it is then send an error message to the user
+                    Windowerror();
+                }
+                Object temp = cb.getSelectedItem();
+                cb.setSelectedItem(cb2.getSelectedItem());
+                cb2.setSelectedItem(temp);
             }
         });
     }
