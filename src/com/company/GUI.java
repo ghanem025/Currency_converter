@@ -27,6 +27,7 @@ public class GUI implements ActionListener {
     String box2;
     int i;
     DecimalFormat f = new DecimalFormat("##.##");
+    private JButton swpBtn;
 
     public GUI() {
         HashMap<String, Integer> currencies = new HashMap<String, Integer>();//create hashmap to store different currencies
@@ -44,6 +45,11 @@ public class GUI implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         panel.setLayout(null);
+
+        swpBtn = new JButton("Swap");//create button to convert the values
+
+        swpBtn.setBounds(200, 200, 100, 30);//set position and width/height for the buttons
+        panel.add(swpBtn);
 
         JButton button = new JButton("Convert");//create button to convert the values
         button.addActionListener(this);//add actionlistener
@@ -78,6 +84,7 @@ public class GUI implements ActionListener {
         cb2 = new JComboBox(country);
         cb2.setBounds(265, 70, 90, 20);
         panel.add(cb2);
+        Swap();
 
         frame.setVisible(true);
     }
@@ -112,12 +119,23 @@ public class GUI implements ActionListener {
 
             return f.format(amount * exchange) + " " + toCode;
         } else {
-            return "no work sadge";
+            return "does not work";
         }
     }
 
     public static void main(String[] args) throws IOException {
         new GUI();
+
+    }
+
+    public void Swap(){
+        swpBtn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("swap");
+
+            }
+        });
     }
 
     @Override
