@@ -102,22 +102,23 @@ public class GUI implements ActionListener {
     private static String GETrequest(String fromcode, String toCode, double amount) throws IOException {
         DecimalFormat f = new DecimalFormat("##.##");
         String GET_URL = "https://free.currconv.com/api/v7/convert?q=" + fromcode + "_" + toCode + "&compact=ultra&apiKey=7fd79f413621cbd201fe";
-        URL url = new URL(GET_URL);
-        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-        httpURLConnection.setRequestMethod("GET");
-        int code = httpURLConnection.getResponseCode();
-        if (code == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader((new InputStreamReader(httpURLConnection.getInputStream())));
+        URL url = new URL(GET_URL); // set our url variable to the given URL above.
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection(); // open connection to receive requests
+        httpURLConnection.setRequestMethod("GET"); // we want a GET request to get all the up-to-date rates of currencies
+        int code = httpURLConnection.getResponseCode(); // this variable will get a response code from the GET request
+        if (code == HttpURLConnection.HTTP_OK) { // if the response code is accepted, we can calculate the currency conversion
+            BufferedReader in = new BufferedReader((new InputStreamReader(httpURLConnection.getInputStream())));// read the file that was recieved from our GET request
+            //this file should contain all the up-to-date exchange rates
             String line;
             StringBuffer response = new StringBuffer();
-            while ((line = in.readLine()) != null) {
+            while ((line = in.readLine()) != null) {// read all the lines in the bufferedReader until you reach the end (reach null)
                 response.append(line);
             }
             in.close();
-            JSONObject obj = new JSONObject(response.toString());
-            Double exchange = obj.getDouble(fromcode + "_" + toCode);
+            JSONObject obj = new JSONObject(response.toString()); // create an JSONObject to store our conversion.
+            Double exchange = obj.getDouble(fromcode + "_" + toCode);// this will store our exchanged value in 00.00 format
 
-            return f.format(amount * exchange) + " " + toCode;
+            return f.format(amount * exchange) + " " + toCode;//return the exchange rate to the caller.
         } else {
             return "does not work";
         }
@@ -125,7 +126,6 @@ public class GUI implements ActionListener {
 
     public static void main(String[] args) throws IOException {
         new GUI();
-
     }
 
     public void Swap(){
@@ -135,9 +135,9 @@ public class GUI implements ActionListener {
                 if (money.getText().equals("")) {//check if the box is empty, if it is then send an error message to the user
                     Windowerror();
                 }
-                Object temp = cb.getSelectedItem();
-                cb.setSelectedItem(cb2.getSelectedItem());
-                cb2.setSelectedItem(temp);
+                Object temp = cb.getSelectedItem();// create temp variable to swap the two boxes
+                cb.setSelectedItem(cb2.getSelectedItem()); //replace box 1 with box 2 item
+                cb2.setSelectedItem(temp); //replace box 2 with box 1 item
             }
         });
     }
@@ -151,11 +151,12 @@ public class GUI implements ActionListener {
             try
             {
                 Integer.parseInt(money.getText());
-                box1 = (String) cb.getSelectedItem();
+                box1 = (String) cb.getSelectedItem(); // set a box variable to get the item in the first box (ex USA,JPY etc.)
                 box2 = (String) cb2.getSelectedItem();
                 amount = Integer.parseInt(money.getText());
                 try {//check if the amount entered is a number/valid input
-                    converted.setText("Here is your converted currency: " + GETrequest(box1, box2, amount));
+                    converted.setText("Here is your converted currency: " + GETrequest(box1, box2, amount));//calculate the conversion
+                    //by calling GETrequest function
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -171,10 +172,12 @@ public class GUI implements ActionListener {
         JFrame frame = new JFrame("Name Error");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JOptionPane.showMessageDialog(frame, "Please enter the amount you would like to convert", "Empty amount", JOptionPane.WARNING_MESSAGE);
+        //this is our Optional panel that will pop up with our message.
     }
     private void Windowerror2(){
         JFrame frame = new JFrame("Name Error");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JOptionPane.showMessageDialog(frame, "Please enter a valid input (letters are not a valid input)", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+        //this is our Optional panel that will pop up with our message.
     }
 }
