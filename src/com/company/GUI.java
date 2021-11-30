@@ -37,6 +37,12 @@ public class GUI implements ActionListener {
         currencies.put("GBP", 4);
         currencies.put("INR", 5);
         currencies.put("JPY", 6);
+        currencies.put("AUD", 7);
+        currencies.put("JOD", 8);
+        currencies.put("KRW",9);
+        currencies.put("CHF", 10);
+        currencies.put("NZD", 11);
+
 
         JFrame frame = new JFrame("Currency Converter");//create Jframe
         JPanel panel = new JPanel();
@@ -132,9 +138,6 @@ public class GUI implements ActionListener {
         swpBtn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (money.getText().equals("")) {//check if the box is empty, if it is then send an error message to the user
-                    Windowerror();
-                }
                 Object temp = cb.getSelectedItem();// create temp variable to swap the two boxes
                 cb.setSelectedItem(cb2.getSelectedItem()); //replace box 1 with box 2 item
                 cb2.setSelectedItem(temp); //replace box 2 with box 1 item
