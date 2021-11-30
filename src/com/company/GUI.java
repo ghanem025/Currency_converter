@@ -17,16 +17,12 @@ import java.util.HashMap;
 
 public class GUI implements ActionListener {
     private JTextField money;
-    private JTextField money2;
-
     JComboBox cb;
     JComboBox cb2;
     double amount, dollar;
     JLabel converted;
     String box1;
     String box2;
-    int i;
-    DecimalFormat f = new DecimalFormat("##.##");
     private JButton swpBtn;
 
     public GUI() {
@@ -43,7 +39,6 @@ public class GUI implements ActionListener {
         currencies.put("KRW",9);
         currencies.put("CHF", 10);
         currencies.put("NZD", 11);
-
 
         JFrame frame = new JFrame("Currency Converter");//create Jframe
         JPanel panel = new JPanel();
@@ -94,17 +89,6 @@ public class GUI implements ActionListener {
 
         frame.setVisible(true);
     }
-
-    public static String[] GetStringArray(ArrayList<String> arr) {
-        String str[] = new String[arr.size()]; //create an array with the same size of our given arraylist
-        Object[] objArr = arr.toArray(); //convert arraylist into an object
-        int i = 0;
-        for (Object obj : objArr) {
-            str[i++] = (String) obj;
-        }
-        return str;
-    }
-
     private static String GETrequest(String fromcode, String toCode, double amount) throws IOException {
         DecimalFormat f = new DecimalFormat("##.##");
         String GET_URL = "https://free.currconv.com/api/v7/convert?q=" + fromcode + "_" + toCode + "&compact=ultra&apiKey=7fd79f413621cbd201fe";
