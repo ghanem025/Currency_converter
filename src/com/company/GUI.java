@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class GUI implements ActionListener {
     private JTextField money;
     private JTextField money2;
-    String country[];
+
     JComboBox cb;
     JComboBox cb2;
     double amount, dollar;
@@ -30,8 +30,9 @@ public class GUI implements ActionListener {
     private JButton swpBtn;
 
     public GUI() {
+
         HashMap<String, Integer> currencies = new HashMap<String, Integer>();//create hashmap to store different currencies
-        currencies.put("USD", 1);
+        currencies.put("USD", 1);//each currency is mapped to a number
         currencies.put("CAD", 2);
         currencies.put("EUR", 3);
         currencies.put("GBP", 4);
@@ -78,10 +79,9 @@ public class GUI implements ActionListener {
         label2.setBounds(252, 65, 80, 25);
         panel.add(label2);
 
-        Set<String> keySet = currencies.keySet();//we want to isolate the Strings in the hashmap, so we make a set of strings
-        //using a hashmap keyset
-        ArrayList<String> listOfKeys = new ArrayList<String>(keySet);// add the key set to a string arraylist
-        country = GetStringArray(listOfKeys);//turn arraylist into an array of strings for the JComboBox
+        Set<String> keySet = currencies.keySet();//we want to isolate the Strings in the hashmap, so we make a set of strings using a hashmap keyset
+        String [] country  = new String[keySet.size()];
+        keySet.toArray(country);
 
         cb = new JComboBox(country);//jCombobox takes an array of strings and creates a drop down using those values.
         cb.setBounds(160, 70, 90, 20);
