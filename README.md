@@ -1,5 +1,5 @@
 # Currency_converter
-A simple Currency converter in Java Using a Currency Converter API and JSON to get the updated rates
+Developed a currency converter in Java Using a Currency Converter API and JSON to get the updated rates.
 
 Description:
 This is a simple currency converter made in Java using java swing for the front end (used java swing to create the GUI) and regular OOP java for the currency conversion.
