@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.HashMap;
 
 public class GUI{
-    double amount, dollar;
+    double amount;
     public GUI() {
         // Create hashmap to store different currencies
         HashMap<String, Integer> currencies = setStringIntegerHashMap();
